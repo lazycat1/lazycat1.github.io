@@ -1,442 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="lazycat1">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="https://example.com/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'en'
-  };
-</script>
-
-  <title>Hexo</title>
-  
-
-
-
-
-
-
-  <noscript>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LazyCat — Personal Homepage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --blue: #1a73e8; --red: #ea4335; --yellow: #fbbc05; --green: #34a853;
+      --bg: #ffffff; --surface: #f8f9fa; --text: #202124; --text2: #5f6368;
+      --border: #dadce0; --radius: 16px;
+      --shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.08);
+      --shadow-lg: 0 4px 16px rgba(0,0,0,.12);
+      --font: 'Noto Sans SC', 'Google Sans', system-ui, -apple-system, sans-serif;
+      --max-w: 960px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--text); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { font-size: 22px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -.5px; }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; gap: 8px; }
+    .nav-links a { text-decoration: none; color: var(--text2); font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: 20px; transition: all .2s; }
+    .nav-links a:hover { background: var(--surface); color: var(--text); }
+    .hero { padding: 100px 24px 80px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(26,115,232,.06) 0%, rgba(234,67,53,.04) 33%, rgba(251,188,5,.04) 66%, rgba(52,168,83,.04) 100%); border-radius: 50%; pointer-events: none; }
+    .hero-avatar { width: 120px; height: 120px; border-radius: 50%; background: var(--surface); border: 3px solid var(--border); margin: 0 auto 28px; display: flex; align-items: center; justify-content: center; font-size: 48px; position: relative; }
+    .hero h1 { font-size: 44px; font-weight: 700; letter-spacing: -1px; margin-bottom: 12px; }
+    .hero h1 span { color: var(--blue); }
+    .hero p { font-size: 18px; color: var(--text2); max-width: 520px; margin: 0 auto; }
+    .hero-tags { display: flex; gap: 8px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+    .hero-tag { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 6px 18px; font-size: 13px; color: var(--text2); font-weight: 500; }
+    section { max-width: var(--max-w); margin: 0 auto; padding: 60px 24px; }
+    .section-title { font-size: 28px; font-weight: 700; letter-spacing: -.5px; margin-bottom: 8px; }
+    .section-sub { font-size: 15px; color: var(--text2); margin-bottom: 36px; }
+    .section-accent { display: inline-block; width: 40px; height: 4px; border-radius: 2px; margin-bottom: 16px; }
+    .accent-blue { background: var(--blue); }
+    .accent-red { background: var(--red); }
+    .accent-yellow { background: var(--yellow); }
+    .accent-green { background: var(--green); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .skill-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; transition: box-shadow .2s, transform .2s; }
+    .skill-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+    .skill-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .skill-card p { font-size: 13px; color: var(--text2); line-height: 1.5; }
+    .skill-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
+    .si-blue { background: rgba(26,115,232,.1); }
+    .si-red { background: rgba(234,67,53,.1); }
+    .si-green { background: rgba(52,168,83,.1); }
+    .si-yellow { background: rgba(251,188,5,.1); }
+    .project-list { display: flex; flex-direction: column; gap: 16px; }
+    .project-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; transition: box-shadow .2s, transform .2s; text-decoration: none; color: inherit; }
+    .project-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+    .project-info h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .project-info p { font-size: 13px; color: var(--text2); }
+    .project-badge { font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 12px; white-space: nowrap; }
+    .badge-green { background: rgba(52,168,83,.1); color: var(--green); }
+    .badge-blue { background: rgba(26,115,232,.1); color: var(--blue); }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .portfolio-card { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: box-shadow .2s, transform .2s; text-decoration: none; color: inherit; }
+    .portfolio-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .portfolio-img { width: 100%; height: 180px; background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--text2); border-bottom: 1px solid var(--border); }
+    .portfolio-body { padding: 20px; }
+    .portfolio-body h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .portfolio-body p { font-size: 13px; color: var(--text2); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .contact-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; display: flex; align-items: center; gap: 16px; transition: box-shadow .2s; text-decoration: none; color: inherit; }
+    .contact-card:hover { box-shadow: var(--shadow-lg); }
+    .contact-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .contact-card span { font-size: 14px; color: var(--text2); }
+    .contact-card strong { display: block; font-size: 15px; font-weight: 600; color: var(--text); }
+    footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); color: var(--text2); font-size: 13px; }
+    footer .dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 12px; }
+    footer .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .empty { color: var(--text2); font-size: 14px; font-style: italic; opacity: .6; }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 30px; } .hero p { font-size: 15px; } .nav-links { display: none; }
+      .section-title { font-size: 22px; } section { padding: 40px 16px; }
+      .project-card { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
   </style>
-</noscript>
-
 </head>
+<body>
+  <nav><div class="nav-inner">
+    <a href="#" class="nav-logo">lazy<span>cat</span></a>
+    <div class="nav-links"><a href="#skills">技能</a><a href="#projects">项目</a><a href="#portfolio">作品</a><a href="#contact">联系</a></div>
+  </div></nav>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <section class="hero">
+    <div class="hero-avatar">🐱</div>
+    <h1>Hi, I'm <span>LazyCat</span></h1>
+    <p>在这里写下你的一句话介绍，说清楚你是谁、做什么的。</p>
+    <div class="hero-tags">
+      <span class="hero-tag">标签1</span>
+      <span class="hero-tag">标签2</span>
+      <span class="hero-tag">标签3</span>
     </div>
-  </div>
+  </section>
 
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+  <section id="skills">
+    <div class="section-accent accent-blue"></div>
+    <h2 class="section-title">技能</h2>
+    <p class="section-sub">我擅长的技术和领域</p>
+    <div class="skills-grid">
+      <div class="skill-card"><div class="skill-icon si-blue">⚡</div><h3>技能名称</h3><p class="empty">填写你的技能描述</p></div>
+      <div class="skill-card"><div class="skill-icon si-red">🔧</div><h3>技能名称</h3><p class="empty">填写你的技能描述</p></div>
+      <div class="skill-card"><div class="skill-icon si-green">🎨</div><h3>技能名称</h3><p class="empty">填写你的技能描述</p></div>
+      <div class="skill-card"><div class="skill-icon si-yellow">📊</div><h3>技能名称</h3><p class="empty">填写你的技能描述</p></div>
     </div>
-  </div>
-</div>
+  </section>
 
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
-            
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://example.com/2020/12/06/my-first-test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lazycat1">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/06/my-first-test/" class="post-title-link" itemprop="url">my first test</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-12-06 16:20:04" itemprop="dateCreated datePublished" datetime="2020-12-06T16:20:04+08:00">2020-12-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-20 14:15:55" itemprop="dateModified" datetime="2021-02-20T14:15:55+08:00">2021-02-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="第一次测试qaq-耗时1天"><a href="#第一次测试qaq-耗时1天" class="headerlink" title="第一次测试qaq  耗时1天"></a>第一次测试qaq  耗时1天</h2><p>   屡次失误</p>
-<h2 id="day-two-lt-0-0-gt-12-41"><a href="#day-two-lt-0-0-gt-12-41" class="headerlink" title="day two&lt;0.0&gt;  12.41"></a>day two&lt;0.0&gt;  12.41</h2><p>##电影<br>    <a target="_blank" rel="noopener" href="https://www.nfmovies.com/">https://www.nfmovies.com/</a><br>    <a target="_blank" rel="noopener" href="http://www.yinfans.me/">http://www.yinfans.me/</a><br>    <a target="_blank" rel="noopener" href="http://shoujizhan.cn/">http://shoujizhan.cn/</a></p>
-<pre><code>  （好听XD   https://www.bilibili.com/video/BV1cb411S76z/
-    吉祥话   http://kil55.cn/islO9/ ）</code></pre>
-<p>   与佛论禅（加密通话）：<a target="_blank" rel="noopener" href="http://www.keyfc.net/bbs/tools/tudoucode.aspx">http://www.keyfc.net/bbs/tools/tudoucode.aspx</a></p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>   世界网址：<a target="_blank" rel="noopener" href="http://www.world68.com/">http://www.world68.com/</a><br>   果壳社区：<a target="_blank" rel="noopener" href="https://www.ghpym.com/">https://www.ghpym.com/</a><br>   吾爱破解：<a target="_blank" rel="noopener" href="https://www.52pojie.cn/">https://www.52pojie.cn/</a><br>   爱达杂货铺：<a target="_blank" rel="noopener" href="https://adzhp.cn/ruan-jian-lun-tan.html">https://adzhp.cn/ruan-jian-lun-tan.html</a><br>   脚本之家：<a target="_blank" rel="noopener" href="https://www.jb51.net/list/index_1.htm?pc">https://www.jb51.net/list/index_1.htm?pc</a><br>   油猴脚本：<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN">https://greasyfork.org/zh-CN</a></p>
-<h2 id="创作灵感"><a href="#创作灵感" class="headerlink" title="创作灵感"></a>创作灵感</h2><p>   无版权图片：<a target="_blank" rel="noopener" href="https://foter.com/">https://foter.com/</a><br>   在线ps（简单好用）：<a target="_blank" rel="noopener" href="http://www.gaoding.com/koutu">www.gaoding.com/koutu</a></p>
-<h2 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h2><p>   思维导图（网站版）：<a target="_blank" rel="noopener" href="https://www.liuchengtu.com/">https://www.liuchengtu.com/</a><br>   知识检索iData：<a target="_blank" rel="noopener" href="https://www.cn-ki.net/">https://www.cn-ki.net/</a><br>   牛客网（求职）：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/">https://www.nowcoder.com/</a><br>   医学微视：<a target="_blank" rel="noopener" href="https://www.mvyxws.com/">https://www.mvyxws.com/</a><br>   大数据（科技的力量）：<a target="_blank" rel="noopener" href="http://hao.199it.com/mobile/index.html">http://hao.199it.com/mobile/index.html</a></p>
-<h2 id="black网导航"><a href="#black网导航" class="headerlink" title="black网导航"></a>black网导航</h2><p>   <a target="_blank" rel="noopener" href="http://hiddenwiki.me/">http://hiddenwiki.me/</a><br>   ip查询（不会用）：<a target="_blank" rel="noopener" href="https://iknowwhatyoudownload.com/en/peer/">https://iknowwhatyoudownload.com/en/peer/</a></p>
-
-      
+  <section id="projects">
+    <div class="section-accent accent-red"></div>
+    <h2 class="section-title">项目</h2>
+    <p class="section-sub">我做过的项目</p>
+    <div class="project-list">
+      <a class="project-card" href="#"><div class="project-info"><h3>项目名称</h3><p class="empty">填写项目简介</p></div><span class="project-badge badge-green">进行中</span></a>
+      <a class="project-card" href="#"><div class="project-info"><h3>项目名称</h3><p class="empty">填写项目简介</p></div><span class="project-badge badge-blue">已完成</span></a>
+      <a class="project-card" href="#"><div class="project-info"><h3>项目名称</h3><p class="empty">填写项目简介</p></div><span class="project-badge badge-blue">已完成</span></a>
     </div>
+  </section>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://example.com/2020/12/06/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lazycat1">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/06/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-12-06 16:09:07" itemprop="dateCreated datePublished" datetime="2020-12-06T16:09:07+08:00">2020-12-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
+  <section id="portfolio">
+    <div class="section-accent accent-yellow"></div>
+    <h2 class="section-title">作品展示</h2>
+    <p class="section-sub">我的作品和成果</p>
+    <div class="portfolio-grid">
+      <a class="portfolio-card" href="#"><div class="portfolio-img">🖼️ 作品截图/预览图</div><div class="portfolio-body"><h3>作品名称</h3><p class="empty">填写作品描述</p></div></a>
+      <a class="portfolio-card" href="#"><div class="portfolio-img">🖼️ 作品截图/预览图</div><div class="portfolio-body"><h3>作品名称</h3><p class="empty">填写作品描述</p></div></a>
+      <a class="portfolio-card" href="#"><div class="portfolio-img">🖼️ 作品截图/预览图</div><div class="portfolio-body"><h3>作品名称</h3><p class="empty">填写作品描述</p></div></a>
     </div>
+  </section>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">lazycat1</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">2</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
+  <section id="contact">
+    <div class="section-accent accent-green"></div>
+    <h2 class="section-title">联系我</h2>
+    <p class="section-sub">找到我的方式</p>
+    <div class="contact-grid">
+      <a class="contact-card" href="#"><div class="contact-icon si-blue">📧</div><div><strong>邮箱</strong><span class="empty">your@email.com</span></div></a>
+      <a class="contact-card" href="https://github.com/lazycat1"><div class="contact-icon si-yellow">💻</div><div><strong>GitHub</strong><span>lazycat1</span></div></a>
+      <a class="contact-card" href="#"><div class="contact-icon si-green">💬</div><div><strong>微信</strong><span class="empty">填写微信号</span></div></a>
+      <a class="contact-card" href="#"><div class="contact-icon si-red">🐦</div><div><strong>Twitter</strong><span class="empty">@your_handle</span></div></a>
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </section>
 
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">lazycat1</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
+  <footer>
+    <div class="dots">
+      <span class="dot" style="background:var(--blue)"></span>
+      <span class="dot" style="background:var(--red)"></span>
+      <span class="dot" style="background:var(--yellow)"></span>
+      <span class="dot" style="background:var(--green)"></span>
+    </div>
+    © 2026 LazyCat — Built with ☕ and curiosity
+  </footer>
 </body>
 </html>
