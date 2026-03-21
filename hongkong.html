@@ -1,1 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香港5天4晚旅行规划 | LAZYCAT'S BLOG</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5253 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,0 100,100 0,100" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #e74c3c;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            width: calc(50% - 40px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .day-card:nth-child(odd) {
+            margin-left: 0;
+            margin-right: auto;
+            border-left: 5px solid #3498db;
+        }
+
+        .day-card:nth-child(even) {
+            margin-left: auto;
+            margin-right: 0;
+            border-right: 5px solid #2ecc71;
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 2px dashed #eee;
+            padding-bottom: 10px;
+        }
+
+        .day-number {
+            background: #e74c3c;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .day-date {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .day-title {
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin: 5px 0;
+        }
+
+        .activity-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .activity-list li {
+            padding: 10px 15px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            position: relative;
+            padding-left: 45px;
+        }
+
+        .activity-list li::before {
+            content: "📍";
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+        }
+
+        .time-tag {
+            background: #3498db;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        .morning { background: #f1c40f; }
+        .afternoon { background: #2ecc71; }
+        .evening { background: #9b59b6; }
+
+        .tips-section {
+            background: #fff9e6;
+            border: 2px solid #f1c40f;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .tips-title {
+            color: #f39c12;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tips-title::before {
+            content: "💡";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f1c40f;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .tip-card h4 {
+            color: #e67e22;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .tip-card p {
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .progress-bar {
+            background: #ecf0f1;
+            height: 8px;
+            border-radius: 4px;
+            margin: 25px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ee5253);
+            width: 100%;
+            border-radius: 4px;
+            animation: progress 2s ease-out;
+        }
+
+        @keyframes progress {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .back-link a {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .back-link a:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            color: #777;
+            font-size: 0.9em;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .day-card {
+                width: 100%;
+                margin-left: 50px !important;
+                margin-right: 0 !important;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 粘性导航栏（可选，如果您的博客没有固定导航栏） */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .sticky-nav a {
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <!-- 如果您的博客已有固定导航栏，可以忽略这个粘性导航栏 -->
+    <div class="sticky-nav">
+        <a href="index.html">← 返回博客首页</a>
+        <span>🇭🇰 香港5天4晚旅行计划</span>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>香港5天4晚旅行规划</h1>
+            <p>4月17日 晚上9点出发 | 体验东方之珠的繁华与魅力</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <!-- Day 1 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">1</div>
+                    <div>
+                        <div class="day-title">抵达与初印象</div>
+                        <div class="day-date">4月17日（周三）晚上 - 4月18日（周四）</div>
+                    </div>
+                </div>
+                <ul class="activity-list">
+                    <li><span class="time-tag evening">晚上</span> 21:00 从出发地启程，飞往香港国际机场</li>
+                    <li><span class="time-tag evening">深夜</span> 抵达香港，办理入境手续，乘坐机场快线/出租车前往酒店</li>
+                    <li><span class="time-tag morning">上午</span> 酒店入住，稍作休息，整理行李</li>
+                    <li><span class="time-tag afternoon">下午</span> 前往尖沙咀，漫步海滨长廊，打卡星光大道</li>
+                    <li><span class="time-tag evening">晚上</span> 在海港城附近享用晚餐，欣赏维多利亚港夜景</li>
+                </ul>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">2</div>
+                    <div>
+                        <div class="day-title">经典地标探索</div>
+                        <div class="day-date">4月18日（周四）全天</div>
+                    </div>
+                </div>
+                <ul class="activity-list">
+                    <li><span class="time-tag morning">上午</span> 09:00 前往太平山顶，乘坐缆车上山，俯瞰香港全景</li>
+                    <li><span class="time-tag morning">上午</span> 参观山顶凌霄阁，打卡杜莎夫人蜡像馆（可选）</li>
+                    <li><span class="time-tag afternoon">下午</span> 下山后前往中环，探索石板街、半山扶梯</li>
+                    <li><span class="time-tag afternoon">下午</span> 在中环品尝正宗港式茶餐厅（推荐：兰芳园、九记牛腩）</li>
+                    <li><span class="time-tag evening">晚上</span> 前往庙街夜市，体验地道大排档，品尝煲仔饭、咖喱鱼蛋</li>
+                </ul>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">3</div>
+                    <div>
+                        <div class="day-title">离岛休闲时光</div>
+                        <div class="day-date">4月19日（周五）全天</div>
+                    </div>
+                </div>
+                <ul class="activity-list">
+                    <li><span class="time-tag morning">上午</span> 09:30 乘坐天星小轮前往中环，换乘渡轮前往南丫岛</li>
+                    <li><span class="time-tag morning">上午</span> 从榕树湾出发，徒步至索罟湾，欣赏沿途风景</li>
+                    <li><span class="time-tag afternoon">下午</span> 在索罟湾享用新鲜海鲜午餐，体验渔村风情</li>
+                    <li><span class="time-tag afternoon">下午</span> 继续探索洪圣爷湾泳滩，享受阳光沙滩</li>
+                    <li><span class="time-tag evening">晚上</span> 返回中环，可选择在IFC商场购物或在兰桂坊体验夜生活</li>
+                </ul>
+            </div>
+
+            <!-- Day 4 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">4</div>
+                    <div>
+                        <div class="day-title">购物与美食之旅</div>
+                        <div class="day-date">4月20日（周六）全天</div>
+                    </div>
+                </div>
+                <ul class="activity-list">
+                    <li><span class="time-tag morning">上午</span> 10:00 前往旺角，体验地道的香港市井生活</li>
+                    <li><span class="time-tag morning">上午</span> 逛波鞋街、女人街，感受香港的购物文化</li>
+                    <li><span class="time-tag afternoon">下午</span> 前往铜锣湾，时代广场、SOGO崇光百货购物</li>
+                    <li><span class="time-tag afternoon">下午</span> 品尝地道小吃：鸡蛋仔、咖喱鱼蛋、丝袜奶茶</li>
+                    <li><span class="time-tag evening">晚上</span> 在时代广场附近享用晚餐，可选择米其林餐厅或地道粤菜馆</li>
+                </ul>
+            </div>
+
+            <!-- Day 5 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">5</div>
+                    <div>
+                        <div class="day-title">文化体验与返程</div>
+                        <div class="day-date">4月21日（周日）上午 - 下午</div>
+                    </div>
+                </div>
+                <ul class="activity-list">
+                    <li><span class="time-tag morning">上午</span> 09:00 前往香港文化博物馆或M+视觉文化博物馆</li>
+                    <li><span class="time-tag morning">上午</span> 参观黄大仙祠，感受香港传统文化</li>
+                    <li><span class="time-tag afternoon">下午</span> 购买手信（推荐：珍妮小熊饼干、陈意斋燕窝糕）</li>
+                    <li><span class="time-tag afternoon">下午</span> 整理行李，办理酒店退房</li>
+                    <li><span class="time-tag evening">晚上</span> 前往机场，结束愉快的香港之旅</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <div class="tips-title">旅行实用贴士</div>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>💳 交通出行</h4>
+                    <p>建议购买八达通卡，可用于地铁、巴士、便利店。机场快线是往返机场最快捷的方式。</p>
+                </div>
+                <div class="tip-card">
+                    <h4>📱 网络通讯</h4>
+                    <p>建议提前购买香港SIM卡（如CSL、3HK），或开通国际漫游。大部分商场提供免费Wi-Fi。</p>
+                </div>
+                <div class="tip-card">
+                    <h4>💰 货币支付</h4>
+                    <p>港币现金必备，部分小店只收现金。大型商场普遍支持支付宝、微信支付和信用卡。</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🍽️ 美食推荐</h4>
+                    <p>必吃：烧腊、茶餐厅、菠萝包、蛋挞、云吞面。注意餐厅营业时间，部分老字号下午休息。</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🌤️ 天气建议</h4>
+                    <p>4月香港天气温和，约22-28℃，多雨。建议携带雨伞、薄外套，穿舒适运动鞋。</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🔌 电源转换</h4>
+                    <p>香港使用英标插头（三脚扁型），需携带转换插头。电压220V。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-link">
+            <a href="index.html">← 返回博客首页</a>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 LAZYCAT'S BLOG | 香港旅行规划 | 计划可能根据实际情况调整</p>
+            <p>最后更新：2024年4月 | 祝您旅途愉快！</p>
+        </div>
+    </div>
+
+    <script>
+        // 简单的动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.day-card');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
 
